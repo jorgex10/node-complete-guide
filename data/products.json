@@ -1,16 +1,16 @@
 [
   {
     "id": "0.1",
-    "title": "A new Book",
+    "title": "A new Book !!!",
     "imageUrl": "https://miro.medium.com/v2/resize:fit:5120/1*42ebJizcUtZBNIZPmmMZ5Q.jpeg",
-    "description": "An Amazing book",
-    "price": "19"
+    "description": "A new Book !!!",
+    "price": "19.99"
   },
   {
     "id": "0.2",
     "title": "Harry Potter",
     "imageUrl": "https://miro.medium.com/v2/resize:fit:5120/1*42ebJizcUtZBNIZPmmMZ5Q.jpeg",
-    "description": "Harry Potter y la Piedra Filosofal",
-    "price": "50"
+    "description": "Harry Potter",
+    "price": "29.99"
   }
 ]
