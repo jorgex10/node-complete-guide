@@ -8,7 +8,13 @@ const shopRoutes = require("./routes/shop");
 
 const errorController = require("./controllers/error");
 
+const dotenv = require("dotenv");
+
+const sequelize = require("./util/database");
+
 const app = express();
+
+dotenv.config();
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -21,4 +27,11 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3000);
+sequelize
+  .sync()
+  .then((result) => {
+    app.listen(3000);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
