@@ -64,7 +64,14 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
 
-  const product = new Product(title, price, description, imageUrl);
+  const product = new Product(
+    title,
+    price,
+    description,
+    imageUrl,
+    null,
+    req.user._id
+  );
 
   product
     .save()
@@ -73,18 +80,6 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect("/admin/products");
     })
     .catch((err) => console.log(err));
-
-  // req.user
-  //   .createProduct({
-  //     title: title,
-  //     price: price,
-  //     imageUrl: imageUrl,
-  //     description: description,
-  //   })
-  //   .then((result) => {
-  //     res.redirect("/admin/products");
-  //   })
-  //   .catch((err) => console.log(err));
 };
 
 exports.getProducts = (req, res, next) => {
