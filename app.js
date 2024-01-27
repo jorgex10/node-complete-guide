@@ -11,7 +11,7 @@ const errorController = require("./controllers/error");
 
 const dotenv = require("dotenv");
 
-// const User = require("./models/user");
+const User = require("./models/user");
 
 const app = express();
 
@@ -24,13 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  // User.findById("65b2dbe9bdf0748fee220cc5")
-  //   .then((user) => {
-  //     req.user = new User(user.name, user.email, user.cart, user._id);
-  //     next();
-  //   })
-  //   .catch((err) => console.log(err));
-  next();
+  User.findById("65b558a2dde52c6730e237ac")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
 });
 
 app.use("/admin", adminRoutes);
@@ -43,6 +42,19 @@ mongoose
     `mongodb+srv://jorgex10:${process.env.MONGODB_PASSWORD}@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority`
   )
   .then((result) => {
+    User.findOne().then((user) => {
+      if (!user) {
+        const user = new User({
+          name: "Jorge",
+          email: "jorge@example.com",
+          cart: {
+            items: [],
+          },
+        });
+        user.save();
+      }
+    });
+
     app.listen(3000);
   })
   .catch((err) => console.log(err));
