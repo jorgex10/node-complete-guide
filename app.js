@@ -11,7 +11,7 @@ const errorController = require("./controllers/error");
 
 const dotenv = require("dotenv");
 
-const User = require("./models/user");
+// const User = require("./models/user");
 
 const app = express();
 
