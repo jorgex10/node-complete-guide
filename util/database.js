@@ -12,6 +12,10 @@
 
 // module.exports = sequelize;
 
+// ............
+// NEXT LINES ARE NO LONGER NEEDED BECAUSE WE ARE USING MONGOOSE
+// ............
+
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
