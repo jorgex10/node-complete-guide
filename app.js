@@ -16,7 +16,7 @@ const errorController = require("./controllers/error");
 const User = require("./models/user");
 
 const MONGODB_URI =
-  "mongodb+srv://jorgex10:asd@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority";
+  "mongodb+srv://jorgex10:nuttertools@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority";
 
 const app = express();
 
@@ -40,15 +40,6 @@ app.use(
     store: store,
   })
 );
-
-app.use((req, res, next) => {
-  User.findById("65b558a2dde52c6730e237ac")
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => console.log(err));
-});
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
