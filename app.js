@@ -2,8 +2,10 @@ const path = require("path");
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
@@ -11,11 +13,17 @@ const authRoutes = require("./routes/auth");
 
 const errorController = require("./controllers/error");
 
-const dotenv = require("dotenv");
-
 const User = require("./models/user");
 
+const MONGODB_URI =
+  "mongodb+srv://jorgex10:asd@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority";
+
 const app = express();
+
+const store = new MongoDBStore({
+  uri: MONGODB_URI,
+  collection: "sessions",
+});
 
 dotenv.config();
 
@@ -29,6 +37,7 @@ app.use(
     secret: "my secret",
     resave: false,
     saveUninitialized: false,
+    store: store,
   })
 );
 
@@ -48,9 +57,7 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    `mongodb+srv://jorgex10:${process.env.MONGODB_PASSWORD}@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority`
-  )
+  .connect(MONGODB_URI)
   .then((result) => {
     User.findOne().then((user) => {
       if (!user) {
