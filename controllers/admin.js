@@ -97,11 +97,10 @@ exports.postAddProduct = (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(422).render("admin/edit-product", {
       pageTitle: "Add Product",
-      path: "/admin/edit-product",
+      path: "/admin/add-product",
       editing: false,
       hasError: true,
       product: {
-        _id: productId,
         title: title,
         imageUrl: imageUrl,
         price: price,
@@ -126,7 +125,9 @@ exports.postAddProduct = (req, res, next) => {
       console.log("Created Product!");
       res.redirect("/admin/products");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.redirect("/500");
+    });
 };
 
 exports.getProducts = (req, res, next) => {
