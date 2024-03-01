@@ -18,8 +18,7 @@ const errorController = require("./controllers/error");
 
 const User = require("./models/user");
 
-const MONGODB_URI =
-  "mongodb+srv://jorgex10:nuttertools@cluster0.7wosptt.mongodb.net/shop?retryWrites=true&w=majority";
+const MONGODB_URI = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.7wosptt.mongodb.net/${process.env.MONGODB_NAME}?retryWrites=true&w=majority`;
 
 const app = express();
 
@@ -121,6 +120,6 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(MONGODB_URI)
   .then((result) => {
-    app.listen(3000);
+    app.listen(process.env.PORT || 3000);
   })
   .catch((err) => console.log(err));

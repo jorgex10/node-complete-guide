@@ -1,0 +1,9 @@
+{
+  "env": {
+    "MONGODB_USER": "<ADD_YOURS>",
+    "MONGODB_PASSWORD": "<ADD_YOURS>",
+    "MONGODB_NAME": "<ADD_YOURS>",
+    "PORT": 3000,
+    "STRIPE_KEY": "<ADD_YOURS>"
+  }
+}
